@@ -1,0 +1,30 @@
+<section class="questions">
+  <video autoplay muted loop id="bgVideo">
+    <source src="/assets/videos/underwater.mp4" type="video/mp4" />
+  </video>
+
+  <div class="question__content fade-in">
+    <div id="question__container"></div>
+    <button class="question__btn" id="prevQuestion" style="display: none">
+      <%= __('previous') %>
+    </button>
+    <button class="question__btn" id="nextQuestion">
+      <%= __('continue') %>
+    </button>
+    <button
+      class="question__btn"
+      id="sendAnswers"
+      data-quizId="<%= quiz.id %>"
+      data-sessionid="<%= session ? session.id : '' %>"
+      style="display: none"
+    >
+      <%= __('send_answers') %>
+    </button>
+  </div>
+</section>
+<script>
+  const questions = <%- JSON.stringify(questions) %>;
+  const user_id = <%= user.id %>;
+</script>
+
+<script src="/js/questionFunctions.js"></script>

@@ -1,0 +1,30 @@
+<section class="login__admin">
+  <form class="login-admin__form" action="/adminRegister" method="POST">
+    <h1 class="login-admin__title">Admin Registration</h1>
+    <% inputs.forEach(input=> { %>
+    <div class="login-admin__form-group">
+      <label class="login-admin__label" for="<%= input.name %>">
+        <%= input.label %>
+      </label>
+      <input
+        type="<%= input.type %>"
+        id="<%= input.name %>"
+        name="<%= input.name %>"
+        value="<%= input.value %>"
+        class="<%= input.err ? 'input-error' : 'login-admin__input' %>"
+      />
+      <% if (input.err) { %>
+      <span class="error-message"> <%= input.err %> </span>
+      <% } %>
+    </div>
+    <% }); %>
+    <button class="login-admin__button" type="submit">Register</button>
+    <button
+      class="login-admin__button"
+      type="button"
+      onclick="window.location.href='/adminLogin'"
+    >
+      Back to Login
+    </button>
+  </form>
+</section>

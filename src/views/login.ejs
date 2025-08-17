@@ -1,0 +1,54 @@
+<section class="login">
+  <video autoplay muted loop id="bgVideo">
+    <source src="/assets/videos/underwater.mp4" type="video/mp4" />
+  </video>
+
+  <button class="btn_admin" onclick="window.location.href='/admin'">Admin</button>
+
+  <img src="/assets/images/logo.png" alt="Logo" class="logo-watermark" />
+
+  <div class="login__content fade-in">
+    <form action="/login" method="POST" onsubmit="fadeAndSubmit(event)">
+      <% inputs.forEach(input => { %>
+        <div class="login__form">
+          <label class="form__label" for="<%= input.name %>"><%= input.label %></label>
+          <input
+            type="<%= input.type %>"
+            id="<%= input.name %>"
+            name="<%= input.name %>"
+            value="<%= input.value %>"
+            <% if (input.pattern) { %> pattern="<%= input.pattern %>" <% } %>
+            <% if (input.maxlength) { %> maxlength="<%= input.maxlength %>" <% } %>
+            <% if (input.minlength) { %> minlength="<%= input.minlength %>" <% } %>
+            <% if (input.autocomplete) { %> autocomplete="<%= input.autocomplete %>" <% } %>
+            class="<%= input.err ? 'input-error' : 'form__input' %>"
+            required
+          />
+          <% if (input.err) { %>
+            <span class="error-message"><%= input.err %></span>
+          <% } %>
+        </div>
+      <% }); %>
+
+      <button id="login-btn" type="submit" class="login__btn"><%= __("login_button") %></button>
+
+    </form>
+
+    <section class="active-users">
+      <h3 class="active-users__title"><%= __("active") %></h3>
+      <ul id="active-users__list"></ul>
+    </section>
+
+    <div id="pincodeModal" class="pincode__modal" style="display:none;">
+      <div class="modal__content">
+        <span id="closeModal" class="modal__close">&times;</span>
+        <h3 class="modal__title"><%= __("enter_pincode_label") %></h3>
+        <input class="modal__input" type="password" id="modalPincode" maxlength="4" pattern="\d{4}" autocomplete="off" />
+        <button class="modal__btn" id="submitPincode"><%= __("submit") %></button>
+        <span class="modal__error" id="pincodeError" style="color:red;"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/loginFunctions.js"></script>

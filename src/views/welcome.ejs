@@ -1,0 +1,34 @@
+<section class="hero">
+  <video autoplay muted loop id="bgVideo">
+    <source src="/assets/videos/underwater.mp4" type="video/mp4" />
+  </video>
+  
+  <img src="/assets/images/logo.png" alt="Logo" class="logo-watermark" />
+
+  <div class="hero-content fade-in">
+    <img
+      src="/assets/images/zeehond.png"
+      alt="Zeehond"
+      class="hero-content__img pop-in"
+    />
+
+    <h1 class="hero-content__title">
+      <%= __('greeting') %>
+    </h1>
+    <p class="hero-content__text"><%= __('today') %></p>
+    <p class="hero-content__text"><%= __('thanks') %></p>
+    <p class="hero-content__text"><%= __('what_know') %></p>
+
+    <form action="/change-lang" method="POST" class="hero-content__language">
+      <select name="lang" onchange="this.form.submit()">
+        <option value="en" <%=locale==='en' ? 'selected' : '' %>>English</option>
+        <option value="nl" <%=locale==='nl' ? 'selected' : '' %>>Nederlands</option>
+        <option value="fr" <%=locale==='fr' ? 'selected' : '' %>>Français</option>
+      </select>
+    </form>
+
+    <form action="/login" method="GET" onsubmit="fadeAndSubmit(event)">
+      <button type="submit" class="hero-content__btn"><%= __('start_quiz') %></button>
+    </form>
+  </div>
+</section>

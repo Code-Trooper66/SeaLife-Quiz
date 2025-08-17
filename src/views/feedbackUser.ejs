@@ -1,0 +1,105 @@
+<div class="feedback-page">
+  <video autoplay muted loop id="bgVideo">
+    <source src="/assets/videos/underwater.mp4" type="video/mp4" />
+    <%= __('video_no_support') %>
+  </video>
+
+  <section class="feedback">
+    <h1 class="feedback__title"><%= __('quiz_overview') %></h1>
+
+    <h2 class="feedback__subtitle"><%= __('quiz1_title') %></h2>
+    <% quiz1Feedback.forEach(item => { %>
+    <div class="feedback__item">
+      <h3 class="feedback__question">
+        <%= item.question[`question_${locale}`] %>
+      </h3>
+      <p class="feedback__answer">
+        <%= __('correct_answer') %>: <%= item.correctAnswer[`answer_${locale}`] %>
+      </p>
+      <p class="feedback__user-answer">
+        <%= __('your_answer') %>:
+        <%= item.userAnswer.selectedAnswer
+          ? item.userAnswer.selectedAnswer[`answer_${locale}`]
+          : __('no_answer') %>
+        -
+        <strong>
+          <%= item.userAnswer.isCorrect ? __('correct') : __('wrong') %>
+        </strong>
+      </p>
+    </div>
+    <% }) %>
+
+    <h2 class="feedback__subtitle"><%= __('quiz2_title') %></h2>
+    <% quiz2Feedback.forEach(item => { %>
+    <div class="feedback__item">
+      <h3 class="feedback__question">
+        <%= item.question[`question_${locale}`] %>
+      </h3>
+      <p class="feedback__answer">
+        <%= __('correct_answer') %>: <%= item.correctAnswer[`answer_${locale}`] %>
+      </p>
+      <p class="feedback__user-answer">
+        <%= __('your_answer') %>:
+        <%= item.userAnswer.selectedAnswer
+          ? item.userAnswer.selectedAnswer[`answer_${locale}`]
+          : __('no_answer') %>
+        -
+        <strong>
+          <%= item.userAnswer.isCorrect ? __('correct') : __('wrong') %>
+        </strong>
+      </p>
+    </div>
+    <% }) %>
+  </section>
+
+  <section class="feedback">
+    <h1 class="feedback__title"><%= __('feedback_title') %></h1>
+    <p class="feedback__question"><%= __('how_was_quiz') %></p>
+    <form
+      class="feedback__form"
+      id="feedbackForm"
+      action="/feedback"
+      method="POST"
+    >
+      <input
+        class="form__input"
+        type="hidden"
+        name="user_id"
+        value="<%= user_id %>"
+      />
+      <input
+        class="form__input"
+        type="hidden"
+        name="quiz_id"
+        value="<%= quiz_id %>"
+      />
+
+      <div class="form__group">
+        <label>
+          <input type="radio" name="text" value="Heel goed" required />
+          <span><%= __('very_good') %></span>
+        </label>
+        <label>
+          <input type="radio" name="text" value="Goed" />
+          <span><%= __('good') %></span>
+        </label>
+        <label>
+          <input type="radio" name="text" value="Neutraal" />
+          <span><%= __('neutral') %></span>
+        </label>
+        <label>
+          <input type="radio" name="text" value="Slecht" />
+          <span><%= __('bad') %></span>
+        </label>
+        <label>
+          <input type="radio" name="text" value="Heel slecht" />
+          <span><%= __('very_bad') %></span>
+        </label>
+      </div>
+
+      <button class="form__submit" type="submit">
+        <%= __('send_feedback') %>
+      </button>
+    </form>
+  </section>
+</div>

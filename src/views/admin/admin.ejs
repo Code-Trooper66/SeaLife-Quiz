@@ -1,0 +1,355 @@
+<section class="admin">
+  <button class="btn_admin" onclick="window.location.href='/'">Home</button>
+  <h1 class="admin__title">Admin page</h1>
+  <div class="admin__container">
+    <div class="form__group">
+      <label class="quiz__label" for="quizSelect">Select Quiz:</label>
+      <select class="quiz__select" id="quizSelect"></select>
+    </div>
+    <div class="form__actions">
+      <button class="quiz__button" type="button" onclick="openAddQuizModal()">
+        Add Quiz
+      </button>
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="openEditQuizModal()"
+        id="editQuizBtn"
+        disabled
+      >
+        Edit Quiz
+      </button>
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="deleteQuiz()"
+        id="deleteQuizBtn"
+        disabled
+      >
+        Delete Quiz
+      </button>
+    </div>
+  </div>
+
+  <div class="admin__container">
+    <div class="form__group">
+      <label class="quiz__label" for="questionSelect">Select Question:</label>
+      <select class="quiz__select" id="questionSelect" disabled></select>
+    </div>
+    <div class="form__actions">
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="openAddQuestionModal()"
+        id="addQuestionBtn"
+      >
+        Add Question</button
+      ><button
+        class="quiz__button"
+        type="button"
+        onclick="openEditQuestionModal()"
+        id="editQuestionBtn"
+      >
+        Edit Question
+      </button>
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="deleteQuestion()"
+        id="deleteQuestionBtn"
+      >
+        Delete Question
+      </button>
+      <button
+        class="quiz__button"
+        id="addUpdateImageBtn"
+        type="button"
+        onclick="openImageModal()"
+      >
+        Add/Update Image
+      </button>
+    </div>
+  </div>
+
+  <div class="admin__container">
+    <div class="form__group">
+      <label class="quiz__label" for="answerSelect">Select Answer:</label>
+      <select class="quiz__select" id="answerSelect"></select>
+    </div>
+    <div class="form__actions">
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="openAddAnswerModal()"
+        id="addAnswerBtn"
+      >
+        Add Answer
+      </button>
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="openEditAnswerModal()"
+        id="editAnswerBtn"
+      >
+        Edit Answer
+      </button>
+      <button
+        class="quiz__button"
+        type="button"
+        onclick="deleteAnswer()"
+        id="deleteAnswerBtn"
+      >
+        Delete Answer
+      </button>
+    </div>
+  </div>
+
+  <div class="admin__container">
+    <div class="form__group">
+      <label class="quiz__label" for="periodSelect">Select Period:</label>
+      <select class="quiz__select" id="periodSelect">
+        <option value="1">January - March</option>
+        <option value="2">April - June</option>
+        <option value="3">July - September</option>
+        <option value="4">October - December</option>
+      </select>
+    </div>
+    <div class="form__actions">
+      <button class="quiz__button" type="button" onclick="exportToExcel()">
+        Export to Excel
+      </button>
+    </div>
+  </div>
+
+  <div class="form__actions">
+    <button class="quiz__button" onclick="window.location.href='/adminLogout'">
+      Logout
+    </button>
+  </div>
+
+  <div class="quiz__modal" id="quizModal" style="display: none">
+    <form class="modal__form" id="quizForm">
+      <input type="hidden" name="quiz_id" id="quiz_id" />
+      <label class="modal__label" for="quiz_title">Titel</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="title"
+        id="quiz_title"
+        required
+      />
+      <label class="modal__label" for="quiz_description">Beschrijving</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="description"
+        id="quiz_description"
+        required
+      />
+      <label class="modal__label">
+        <input type="checkbox" id="quiz_active" checked />
+        Actief
+      </label>
+      <div class="form__actions">
+        <button class="modal__button" type="submit" id="saveQuizBtn">
+          Opslaan
+        </button>
+        <button class="modal__button" type="button" onclick="closeQuizModal()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="quiz__modal" id="addQuestionModal" style="display: none">
+    <form class="modal__form" id="addQuestionForm">
+      <label class="modal__label" for="add_vraag_nl">Vraag (NL)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_vraag_nl"
+        id="add_vraag_nl"
+        required
+      />
+      <label class="modal__label" for="add_vraag_en">Vraag (EN)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_vraag_en"
+        id="add_vraag_en"
+        required
+      />
+      <label class="modal__label" for="add_vraag_fr">Vraag (FR)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_vraag_fr"
+        id="add_vraag_fr"
+        required
+      />
+      <div class="form__actions">
+        <button class="modal__button" type="submit">Opslaan</button>
+        <button
+          class="modal__button"
+          type="button"
+          onclick="closeAddQuestionModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="quiz__modal" id="questionModal" style="display: none">
+    <form class="modal__form" id="questionForm">
+      <input type="hidden" name="vraag_id" id="vraag_id" />
+      <label class="modal__label" for="vraag_nl">Vraag (NL)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="vraag_nl"
+        id="vraag_nl"
+        required
+      />
+      <label class="modal__label" for="vraag_en">Vraag (EN)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="vraag_en"
+        id="vraag_en"
+        required
+      />
+      <label class="modal__label" for="vraag_fr">Vraag (FR)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="vraag_fr"
+        id="vraag_fr"
+        required
+      />
+      <div class="form__actions">
+        <button class="modal__button" type="submit" id="saveQuestionBtn">
+          Opslaan
+        </button>
+        <button
+          class="modal__button"
+          type="button"
+          onclick="closeQuestionModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="quiz__modal" id="imageModal" style="display: none">
+    <form class="modal__form" id="imageForm" enctype="multipart/form-data">
+      <input type="hidden" name="vraag_id" id="imageVraagId" />
+      <label class="modal__label" for="imageFile">Select image:</label>
+      <input
+        class="modal__input"
+        type="file"
+        name="image"
+        id="imageFile"
+        accept="image/*"
+        required
+      />
+      <div class="form__actions">
+        <button class="modal__button" type="submit">Upload</button>
+        <button class="modal__button" type="button" onclick="closeImageModal()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="quiz__modal" id="addAnswerModal" style="display: none">
+    <form class="modal__form" id="addAnswerForm">
+      <label class="modal__label" for="add_answer_nl">Antwoord (NL)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_answer_nl"
+        id="add_answer_nl"
+        required
+      />
+      <label class="modal__label" for="add_answer_en">Antwoord (EN)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_answer_en"
+        id="add_answer_en"
+        required
+      />
+      <label class="modal__label" for="add_answer_fr">Antwoord (FR)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="add_answer_fr"
+        id="add_answer_fr"
+        required
+      />
+      <label class="modal__label">
+        <input type="checkbox" id="add_correct_answer" />
+        Correct
+      </label>
+      <div class="form__actions">
+        <button class="modal__button" type="submit">Opslaan</button>
+        <button
+          class="modal__button"
+          type="button"
+          onclick="closeAddAnswerModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="quiz__modal" id="answerModal" style="display: none">
+    <form class="modal__form" id="answerForm">
+      <input type="hidden" name="answer_id" id="answer_id" />
+      <label class="modal__label" for="answer_nl">Antwoord (NL)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="answer_nl"
+        id="answer_nl"
+        required
+      />
+      <label class="modal__label" for="answer_en">Antwoord (EN)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="answer_en"
+        id="answer_en"
+        required
+      />
+      <label class="modal__label" for="answer_fr">Antwoord (FR)</label>
+      <input
+        class="modal__input"
+        type="text"
+        name="answer_fr"
+        id="answer_fr"
+        required
+      />
+      <label class="modal__label">
+        <input type="checkbox" id="correct_answer" />
+        Correct
+      </label>
+      <div class="form__actions">
+        <button class="modal__button" type="submit" id="saveAnswerBtn">
+          Opslaan
+        </button>
+        <button
+          class="modal__button"
+          type="button"
+          onclick="closeAnswerModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<script src="/js/admincrud.js"></script>
+<script src="/js/adminpopup.js"></script>
