@@ -1,0 +1,624 @@
+.hidden {
+  display: none;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.admin {
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 123, 255, 0.05) 0%,
+    rgba(0, 180, 216, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  position: relative;
+}
+
+.admin::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(0, 123, 255, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(0, 180, 216, 0.05) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.admin__title {
+  color: var(--dark-blue-text);
+  margin-left: 5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: inline-block;
+  z-index: 10;
+}
+
+.admin__title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--light-blue),
+    var(--light-blue-hover)
+  );
+  border-radius: 2px;
+}
+
+.admin__container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.admin__container .form__group {
+  flex: 1;
+  max-width: none;
+  min-width: 300px;
+}
+
+.admin__container .form__actions {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+.admin__container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent
+  );
+}
+
+.quiz__label {
+  color: var(--dark-blue-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  min-width: 150px;
+}
+
+.quiz__select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grey);
+  background: var(--white);
+  color: var(--dark-blue-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz__select:focus {
+  outline: none;
+  border-color: var(--light-blue);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.quiz__button,
+.modal__button,
+.btn_admin {
+  background-color: var(--light-blue);
+  color: var(--white);
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.btn_admin {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 100;
+}
+
+.quiz__button:hover,
+.modal__button:hover,
+.btn_admin:hover {
+  background-color: var(--light-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(0, 180, 216, 0.7);
+}
+
+.quiz__button:disabled {
+  background-color: var(--grey);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.quiz__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  z-index: 9999;
+  padding: 1rem;
+  animation: modalOverlayFadeIn 0.3s ease;
+}
+
+.modal__form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: modalFormSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal__form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent
+  );
+}
+
+.modal__label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: var(--dark-blue-text);
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+.modal__label:first-of-type {
+  margin-top: 0;
+}
+
+.modal__input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.modal__input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.75rem;
+  margin-bottom: 0;
+  transform: scale(1.2);
+  accent-color: var(--light-blue);
+}
+
+.modal__form .form__actions {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal__button {
+  background: var(--light-blue);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.modal__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.modal__button:hover::before {
+  left: 100%;
+}
+
+.modal__button:hover {
+  background: var(--light-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(0, 180, 216, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal__button:active {
+  transform: translateY(0);
+}
+
+.modal__button[type="button"] {
+  background: rgba(108, 117, 125, 0.9);
+  color: var(--white);
+}
+
+.modal__button[type="button"]:hover {
+  background: rgba(108, 117, 125, 1);
+  box-shadow: 
+    0 8px 25px rgba(108, 117, 125, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes modalOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalFormSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/*Login & Registration*/
+.login__admin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  backdrop-filter: blur(2px);
+  width: 100%;
+  height: 100%;
+}
+
+.login-admin__title {
+  color: var(--dark-blue-text);
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-admin__form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 1.25rem;
+  width: 100%;
+  max-width: 26rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.login-admin__form-group {
+  margin-bottom: 1.5rem;
+}
+
+.login-admin__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-blue-text);
+}
+
+.login-admin__input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.625rem;
+  border: 1px solid var(--grey);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.login-admin__input:focus {
+  outline: none;
+  border-color: var(--light-blue-hover);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.25);
+}
+
+.login-admin__button {
+  background-color: var(--light-blue);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 0.625rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.login-admin__button:hover {
+  background-color: var(--light-blue-hover);
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 180, 216, 0.7);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .admin {
+    padding: 1.5rem;
+  }
+
+  .admin__title {
+    margin-left: 2rem;
+    font-size: 2.2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .admin__container {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .form__group {
+    max-width: 100%;
+  }
+
+  .quiz__label {
+    min-width: 120px;
+    font-size: 1rem;
+  }
+
+  .modal__form {
+    max-width: 90%;
+    padding: 2rem 1.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .modal__form .form__actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modal__button {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+  }
+
+  .login-admin__form {
+    max-width: 22rem;
+    padding: 1.5rem;
+  }
+
+  .btn_admin {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .admin {
+    padding: 1rem;
+  }
+
+  .admin__title {
+    margin-left: 0;
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .admin__container {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .admin__container .form__group {
+    min-width: auto;
+  }
+
+  .admin__container .form__actions {
+    margin-top: 0.5rem;
+  }
+
+  .admin__container:hover {
+    transform: none;
+  }
+
+  .form__group {
+    gap: 0.75rem;
+  }
+
+  .form__actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quiz__button,
+  .modal__button,
+  .btn_admin {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .btn_admin {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .quiz__label {
+    min-width: auto;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quiz__select {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .modal__form {
+    max-width: 95%;
+    padding: 1.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .modal__input {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .modal__label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal__form .form__actions {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modal__button {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 0.95rem;
+  }
+
+  .login__admin {
+    padding: 1rem;
+  }
+
+  .login-admin__form {
+    max-width: 100%;
+    padding: 1.5rem 1rem;
+    margin: 0 1rem;
+  }
+
+  .login-admin__title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .login-admin__input {
+    padding: 0.85rem;
+    font-size: 0.95rem;
+  }
+
+  .login-admin__button {
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .login-admin__button:hover {
+    transform: scale(1.02);
+  }
+}
